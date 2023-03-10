@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- import category javascript-->
+    <script src="subcategory.js"  type="text/javascript"></script>
+    <!-- add axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js" crossorigin="anonymous"></script>
+    <script>
+      //const form = document.querySelector("form");
+    function myFunction() {
+     
+        console.log("submit");
+        const date = document.getElementById("date").value;
+        const country = document.getElementById("country").value;
+        const city = document.getElementById("city").value;
+        const category = document.getElementById("category").value;
+        const subcategory = document.getElementById("sub").value;
+        const description = document.getElementById("description").value;
+        const cost = document.getElementById("cost").value;
+        const paidmethod = document.getElementById("paid").value;
+        const note = document.getElementById("note").value;
+
+        const data = {date: date, country: country, city: city, 
+          category: category, subcategory: subcategory,
+          description: description, cost: cost, paidmethod: paidmethod,
+          note: note};
+
+        console.log(data);
+        
+
+        axios.post("http://localhost:8000/add", data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          
+    }
+      
+    </script>
+  </head>
+  
+  <body>
+    <h1>Hello world</h1>
+
+      <label  for="date">Date</label>
+      <input  type="date" id='date' name="date"> <br><br> 
+      <label  for="country">Country</label>
+      <input  type="text" id="country" name="country"> <br><br>
+      <label  for="city">City</label>
+      <input  type="text" id="city" name="city"> <br><br>
+      <label  for="category">Category</label>
+      <select id="category" name="category" size="1" onchange="makeSubmenu(this.value)">
+        <option value="" disabled selected>Choose Category</option>
+        <option>Transportation</option>
+        <option>Food</option>
+        <option>Grocery</option>
+        <option>Tickets</option>
+        <option>Souvenir</option>
+        <option>Hotel</option>
+        <option>Others</option>
+        </select>
+        <select id="sub" name="sub" size="1">
+        <option value="" disabled selected>Choose Subcategory</option>
+        <option></option>
+        </select><br><br>
+
+        <label  for="Description">Description</label>
+        <input  type="text" id="description" name="description"> <br><br>
+        <label  for="cost">Cost (CAD)</label>
+        <input  type="text" id="cost" name="cost"> <br><br>
+        <label>Paid Method</label>
+        <input type="radio" name="paid" id="paid" value='cash'>
+        <label  for="paid">Cash</label>
+        <input type="radio" name="paid" id="paid" value='credit card'>
+        <label  for="paid">Credit Card</label><br><br>
+    
+        <label for="note">Note</label>
+        <textarea name="note" id="note">
+        </textarea><br><br>
+      <button onclick="myFunction()">Submit</button>
+   
+  </body>
+
+</html>
+
