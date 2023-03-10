@@ -12,11 +12,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Request handler/endpoint
 app.post("/add", (req, res) => {
-    let username = req.body.username;
-    let category = req.body.category;
-    let subcategory = req.body.sub;
-    let userPicture = req.files.userPicture;
-    console.log(`${username}, ${category}, ${subcategory}` );
+    const username = req.body.username;
+    const category = req.body.category;
+    const subcategory = req.body.sub;
+    const userPicture = req.files.userPicture;
+
+    console.log(req.body);
+
     res.send(`
       Your username is: ${username}
       Uploaded image name is: ${userPicture.name}
@@ -25,7 +27,7 @@ app.post("/add", (req, res) => {
     `);
 });
 
-// Start up the server (my live server is 5500)
-app.listen(5500, () => {
-    console.log("Server started on port 5500");
+// Start up the server 
+app.listen(8000, () => {
+    console.log("Server started on port 8000");
 });
